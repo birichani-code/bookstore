@@ -1,13 +1,16 @@
 package com.bookstore.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import lombok.*;
+import org.hibernate.Hibernate;
+
+import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
 public class ShippingAddress {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -21,101 +24,19 @@ public class ShippingAddress {
 	private String ShippingAddressZipcode;
 	
 	
-	@ManyToOne
-	@JoinColumn(name = "user_id")
-	private User user;
+	@OneToOne
+	private Order order;
 
-
-	public Long getId() {
-		return id;
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+		ShippingAddress that = (ShippingAddress) o;
+		return Objects.equals(id, that.id);
 	}
 
-
-	public void setId(Long id) {
-		this.id = id;
+	@Override
+	public int hashCode() {
+		return 0;
 	}
-
-
-	public String getShippingAddressName() {
-		return ShippingAddressName;
-	}
-
-
-	public void setShippingAddressName(String shippingAddressName) {
-		ShippingAddressName = shippingAddressName;
-	}
-
-
-	public String getShippingAddressStreet1() {
-		return ShippingAddressStreet1;
-	}
-
-
-	public void setShippingAddressStreet1(String shippingAddressStreet1) {
-		ShippingAddressStreet1 = shippingAddressStreet1;
-	}
-
-
-	public String getShippingAddressStreet2() {
-		return ShippingAddressStreet2;
-	}
-
-
-	public void setShippingAddressStreet2(String shippingAddressStreet2) {
-		ShippingAddressStreet2 = shippingAddressStreet2;
-	}
-
-
-	public String getShippingAddressCity() {
-		return ShippingAddressCity;
-	}
-
-
-	public void setShippingAddressCity(String shippingAddressCity) {
-		ShippingAddressCity = shippingAddressCity;
-	}
-
-
-	public String getShippingAddressState() {
-		return ShippingAddressState;
-	}
-
-
-	public void setShippingAddressState(String shippingAddressState) {
-		ShippingAddressState = shippingAddressState;
-	}
-
-
-	public String getShippingAddressCountry() {
-		return ShippingAddressCountry;
-	}
-
-
-	public void setShippingAddressCountry(String shippingAddressCountry) {
-		ShippingAddressCountry = shippingAddressCountry;
-	}
-
-
-	public String getShippingAddressZipcode() {
-		return ShippingAddressZipcode;
-	}
-
-
-	public void setShippingAddressZipcode(String shippingAddressZipcode) {
-		ShippingAddressZipcode = shippingAddressZipcode;
-	}
-
-
-	public User getUser() {
-		return user;
-	}
-
-
-	public void setUser(User user) {
-		this.user = user;
-	}
-
-
-	
-
 }

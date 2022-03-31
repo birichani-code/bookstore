@@ -15,7 +15,7 @@ public class UserShippingServiceImpl implements UserShippingService{
 	
 	
 	public UserShipping findById(Long id) {
-		return userShippingRepository.findById(id);
+		return userShippingRepository.findById(id).orElseThrow(()->new NullPointerException("UserShipping"+ id+"Not Found."));
 	}
 	
 	public void removeById(Long id) {

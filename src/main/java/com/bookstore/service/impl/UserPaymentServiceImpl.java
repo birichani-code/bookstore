@@ -14,7 +14,7 @@ public class UserPaymentServiceImpl implements UserPaymentService{
 	private UserPaymentRepository userPaymentRepository;
 		
 	public UserPayment findById(Long id) {
-		return userPaymentRepository.findById(id);
+		return userPaymentRepository.findById(id).orElseThrow(()->new NullPointerException("UserPayment "+id+"Not Found."));
 	}
 	
 	public void removeById(Long id) {
